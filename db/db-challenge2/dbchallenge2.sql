@@ -8,7 +8,7 @@ CREATE TABLE user (
   businessphone_number VARCHAR(13),
   cellphone_number     VARCHAR(13),
   is_deleted           CHAR(1) DEFAULT '0' NOT NULL,
-  created_at           DATETIME NOT NULL,
+  created_at           DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   updated_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE chat (
   is_direct_chat             CHAR(1) DEFAULT '0' NOT NULL,
   is_deleted                 CHAR(1) DEFAULT '0' NOT NULL,
   create_user_id             INTEGER NOT NULL REFERENCES user(id),
-  created_at                 DATETIME NOT NULL,
+  created_at                 DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id             INTEGER NOT NULL REFERENCES user(id),
   updatad_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -34,7 +34,7 @@ CREATE TABLE post (
   chat_id        INTEGER NOT NULL REFERENCES chat(id),
   is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
   create_user_id INTEGER NOT NULL REFERENCES user(id),
-  created_at     DATETIME NOT NULL,
+  created_at     DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -49,7 +49,7 @@ CREATE TABLE task (
   is_completed   CHAR(1) DEFAULT '0' NOT NULL,
   is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
   create_user_id INTEGER NOT NULL REFERENCES user(id),
-  created_at     DATETIME NOT NULL,
+  created_at     DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -58,6 +58,6 @@ CREATE TABLE task (
 CREATE TABLE chat_participant (
   user_id    INTEGER NOT NULL REFERENCES user(id),
   chat_id    INTEGER NOT NULL REFERENCES chat(id),
-  created_at DATETIME NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (user_id, chat_id)
 );
