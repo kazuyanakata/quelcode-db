@@ -20,9 +20,9 @@ CREATE TABLE chat (
   is_permission_send_file    CHAR(1) DEFAULT '1' NOT NULL,
   is_direct_chat             CHAR(1) DEFAULT '0' NOT NULL,
   is_deleted                 CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id             INTEGER REFERENCES user(id),
+  create_user_id             INTEGER NOT NULL REFERENCES user(id),
   created_at                 DATETIME NOT NULL,
-  update_user_id             INTEGER REFERENCES user(id),
+  update_user_id             INTEGER NOT NULL REFERENCES user(id),
   updatad_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -31,11 +31,11 @@ CREATE TABLE post (
   id             INTEGER PRIMARY KEY AUTO_INCREMENT,
   content        VARCHAR(1000) NOT NULL,
   file_name      VARCHAR(100),
-  chat_id        INTEGER REFERENCES chat(id),
+  chat_id        INTEGER NOT NULL REFERENCES chat(id),
   is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id INTEGER REFERENCES user(id),
+  create_user_id INTEGER NOT NULL REFERENCES user(id),
   created_at     DATETIME NOT NULL,
-  update_user_id INTEGER REFERENCES user(id),
+  update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -43,21 +43,21 @@ CREATE TABLE post (
 CREATE TABLE task (
   id             INTEGER PRIMARY KEY AUTO_INCREMENT,
   content        VARCHAR(1000) NOT NULL,
-  main_user_id   INTEGER REFERENCES user(id),
-  chat_id        INTEGER REFERENCES chat(id),
+  main_user_id   INTEGER NOT NULL REFERENCES user(id),
+  chat_id        INTEGER NOT NULL REFERENCES chat(id),
   dead_line      DATETIME,
   is_completed   CHAR(1) DEFAULT '0' NOT NULL,
   is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id INTEGER REFERENCES user(id),
+  create_user_id INTEGER NOT NULL REFERENCES user(id),
   created_at     DATETIME NOT NULL,
-  update_user_id INTEGER REFERENCES user(id),
+  update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- chat_participantテーブル
 CREATE TABLE chat_participant (
-  user_id    INTEGER REFERENCES user(id),
-  chat_id    INTEGER REFERENCES chat(id),
+  user_id    INTEGER NOT NULL REFERENCES user(id),
+  chat_id    INTEGER NOT NULL REFERENCES chat(id),
   created_at DATETIME NOT NULL,
   PRIMARY KEY (user_id, chat_id)
 );
