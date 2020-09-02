@@ -10,7 +10,7 @@ CREATE TABLE user (
   is_deleted           TINYINT(1) DEFAULT 0 NOT NULL,
   created_at           DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   updated_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
-);
+) ENGINE = INNODB;
 
 -- chatテーブル
 CREATE TABLE chat (
@@ -24,7 +24,7 @@ CREATE TABLE chat (
   created_at                 DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id             INTEGER NOT NULL REFERENCES user(id),
   updatad_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
-);
+) ENGINE = INNODB;
 
 -- postテーブル
 CREATE TABLE post (
@@ -37,7 +37,7 @@ CREATE TABLE post (
   created_at     DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
-);
+) ENGINE = INNODB;
 
 -- taskテーブル
 CREATE TABLE task (
@@ -52,7 +52,7 @@ CREATE TABLE task (
   created_at     DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id INTEGER NOT NULL REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
-);
+) ENGINE = INNODB;
 
 -- chat_participantテーブル
 CREATE TABLE chat_participant (
@@ -60,4 +60,4 @@ CREATE TABLE chat_participant (
   chat_id    INTEGER NOT NULL REFERENCES chat(id),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (user_id, chat_id)
-);
+) ENGINE = INNODB;
