@@ -5,8 +5,8 @@ CREATE TABLE user (
   mail                 VARCHAR(100) NOT NULL UNIQUE,
   password             VARCHAR(100) NOT NULL,
   introduction         VARCHAR(1000),
-  businessphone_number VARCHAR(13) CHECK (businessphone_number LIKE '%-%'),
-  cellphone_number     VARCHAR(13) CHECK (cellphone_number LIKE '%-%'),
+  businessphone_number VARCHAR(13),
+  cellphone_number     VARCHAR(13),
   is_deleted           CHAR(1) DEFAULT '0' NOT NULL,
   created_at           DATETIME NOT NULL,
   updated_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
