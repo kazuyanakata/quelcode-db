@@ -1,8 +1,8 @@
 -- userテーブル
 CREATE TABLE user (
   id                   INTEGER PRIMARY KEY AUTO_INCREMENT,
-  name                 VARCHAR(100) NOT NULL UNIQUE,
-  mail                 VARCHAR(100) NOT NULL UNIQUE,
+  name                 VARCHAR(100) NOT NULL,
+  mail                 VARCHAR(100) NOT NULL,
   password             VARCHAR(100) NOT NULL,
   introduction         VARCHAR(1000),
   businessphone_number VARCHAR(13),
