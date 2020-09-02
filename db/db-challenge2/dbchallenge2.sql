@@ -1,63 +1,63 @@
 -- userテーブル
 CREATE TABLE user (
-  user_id              INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_name            VARCHAR(100) NOT NULL UNIQUE,
-  user_mailadress      VARCHAR(100) NOT NULL UNIQUE,
-  user_password        VARCHAR(100) NOT NULL,
-  user_introduction    VARCHAR(1000),
+  id                   INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name                 VARCHAR(100) NOT NULL UNIQUE,
+  mail                 VARCHAR(100) NOT NULL UNIQUE,
+  password             VARCHAR(100) NOT NULL,
+  introduction         VARCHAR(1000),
   businessphone_number VARCHAR(13) CHECK (businessphone_number LIKE '%-%'),
   cellphone_number     VARCHAR(13) CHECK (cellphone_number LIKE '%-%'),
-  delete_flg           CHAR(1) DEFAULT '0' NOT NULL,
+  is_deleted           CHAR(1) DEFAULT '0' NOT NULL,
   created_at           DATETIME NOT NULL,
-  updeted_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+  updated_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- chatテーブル
 CREATE TABLE chat (
-  chat_id         INTEGER PRIMARY KEY AUTO_INCREMENT,
-  chat_name       VARCHAR(100) NOT NULL,
-  chat_overview   VARCHAR(1000),
-  file_send_flg   CHAR(1) DEFAULT '1' NOT NULL,
-  direct_chat_flg CHAR(1) DEFAULT '0' NOT NULL,
-  delete_flg      CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id  INTEGER REFERENCES user(user_id),
-  created_at      DATETIME NOT NULL,
-  update_user_id  INTEGER REFERENCES user(user_id),
-  updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+  id                         INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name                       VARCHAR(100) NOT NULL,
+  overview                   VARCHAR(1000),
+  is_permission_send_file    CHAR(1) DEFAULT '1' NOT NULL,
+  is_direct_chat             CHAR(1) DEFAULT '0' NOT NULL,
+  is_deleted                 CHAR(1) DEFAULT '0' NOT NULL,
+  create_user_id             INTEGER REFERENCES user(id),
+  created_at                 DATETIME NOT NULL,
+  update_user_id             INTEGER REFERENCES user(id),
+  updatad_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- postテーブル
 CREATE TABLE post (
-  post_id        INTEGER PRIMARY KEY AUTO_INCREMENT,
-  post_content   VARCHAR(1000) NOT NULL,
+  id             INTEGER PRIMARY KEY AUTO_INCREMENT,
+  content        VARCHAR(1000) NOT NULL,
   file_name      VARCHAR(100),
-  chat_id        INTEGER REFERENCES chat(chat_id),
-  delete_flg     CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id INTEGER REFERENCES user(user_id),
+  chat_id        INTEGER REFERENCES chat(id),
+  is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
+  create_user_id INTEGER REFERENCES user(id),
   created_at     DATETIME NOT NULL,
-  update_user_id INTEGER REFERENCES user(user_id),
+  update_user_id INTEGER REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- taskテーブル
 CREATE TABLE task (
-  task_id        INTEGER PRIMARY KEY AUTO_INCREMENT,
-  task_content   VARCHAR(1000) NOT NULL,
-  main_user_id   INTEGER REFERENCES user(user_id),
-  chat_id        INTEGER REFERENCES chat(chat_id),
+  id             INTEGER PRIMARY KEY AUTO_INCREMENT,
+  content        VARCHAR(1000) NOT NULL,
+  main_user_id   INTEGER REFERENCES user(id),
+  chat_id        INTEGER REFERENCES chat(id),
   dead_line      DATETIME,
-  complete_flg   CHAR(1) DEFAULT '0' NOT NULL,
-  delete_flg     CHAR(1) DEFAULT '0' NOT NULL,
-  create_user_id INTEGER REFERENCES user(user_id),
+  is_completed   CHAR(1) DEFAULT '0' NOT NULL,
+  is_deleted     CHAR(1) DEFAULT '0' NOT NULL,
+  create_user_id INTEGER REFERENCES user(id),
   created_at     DATETIME NOT NULL,
-  update_user_id INTEGER REFERENCES user(user_id),
+  update_user_id INTEGER REFERENCES user(id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- chat_participantテーブル
 CREATE TABLE chat_participant (
-  user_id    INTEGER REFERENCES user(user_id),
-  chat_id    INTEGER REFERENCES chat(chat_id),
+  user_id    INTEGER REFERENCES user(id),
+  chat_id    INTEGER REFERENCES chat(id),
   created_at DATETIME NOT NULL,
   PRIMARY KEY (user_id, chat_id)
 );
