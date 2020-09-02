@@ -10,7 +10,7 @@ CREATE TABLE user (
   delete_flg           CHAR(1) DEFAULT '0' NOT NULL,
   created_at           DATETIME NOT NULL,
   updeted_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-)
+);
 
 -- chatテーブル
 CREATE TABLE chat (
@@ -24,7 +24,7 @@ CREATE TABLE chat (
   created_at      DATETIME NOT NULL,
   update_user_id  INTEGER REFERENCES user(user_id),
   updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-)
+);
 
 -- postテーブル
 CREATE TABLE post (
@@ -37,7 +37,7 @@ CREATE TABLE post (
   created_at     DATETIME NOT NULL,
   update_user_id INTEGER REFERENCES user(user_id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-)
+);
 
 -- taskテーブル
 CREATE TABLE task (
@@ -52,7 +52,7 @@ CREATE TABLE task (
   created_at     DATETIME NOT NULL,
   update_user_id INTEGER REFERENCES user(user_id),
   updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-)
+);
 
 -- chat_participantテーブル
 CREATE TABLE chat_participant (
@@ -60,4 +60,4 @@ CREATE TABLE chat_participant (
   chat_id    INTEGER REFERENCES chat(chat_id),
   created_at DATETIME NOT NULL,
   PRIMARY KEY (user_id, chat_id)
-)
+);
