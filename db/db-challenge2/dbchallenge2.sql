@@ -23,7 +23,7 @@ CREATE TABLE chat (
   create_user_id             INTEGER NOT NULL REFERENCES user(id),
   created_at                 DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   update_user_id             INTEGER NOT NULL REFERENCES user(id),
-  updatad_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
+  updated_at                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
 ) ENGINE = INNODB;
 
 -- postテーブル
